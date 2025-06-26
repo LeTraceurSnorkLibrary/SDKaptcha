@@ -1,0 +1,23 @@
+{
+    "name": "letraceursnork/unofficial-captcha-sdk",
+    "description": "Unofficial SDK bundle for different external CAPTCHA providers",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "LeTraceurSnork",
+            "email": "le_traceur_snork@mail.ru"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "LeTraceurSnork\\UnofficialCaptchaSdk\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.5"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

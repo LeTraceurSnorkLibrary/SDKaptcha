@@ -1,0 +1,9 @@
+# IDEs
+.idea/
+
+# Vendors
+/vendor/
+
+# Cache and etc
+*.cache
+*.lock
