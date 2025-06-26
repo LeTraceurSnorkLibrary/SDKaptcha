@@ -1,0 +1,28 @@
+{
+    "name": "letraceursnork/unofficial-captcha-sdk",
+    "description": "Unofficial SDK bundle for different external CAPTCHA providers",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "LeTraceurSnork",
+            "email": "le_traceur_snork@mail.ru"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "LeTraceurSnork\\UnofficialCaptchaSdk\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.5",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^4.0|^5.0|^6.0|^7.0",
+        "letraceursnork/captcha-verifier": "0.1.0",
+        "psr/http-client": "^1.0",
+        "teapot/status-code": "^1.0|^2.0"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
