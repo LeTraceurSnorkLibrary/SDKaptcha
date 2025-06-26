@@ -109,13 +109,14 @@ class SmartCaptcha implements CaptchaVerifierInterface
             $body['ip'] = $this->ip;
         }
 
-        $json = \json_encode($body);
-
         return new Request(
             static::HTTP_METHOD,
             static::SITE_VERIFY_URL,
-            ['Content-Type' => 'application/json'],
-            $json
+            [
+                'Accept'       => 'application/json',
+                'Content-Type' => 'application/x-www-form-urlencoded',
+            ],
+            http_build_query($body)
         );
     }
 }
