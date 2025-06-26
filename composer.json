@@ -14,6 +14,11 @@
             "LeTraceurSnork\\UnofficialCaptchaSdk\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "require": {
         "php": ">=5.5",
         "ext-json": "*",
@@ -22,7 +27,15 @@
         "psr/http-client": "^1.0",
         "teapot/status-code": "^1.0|^2.0"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^9.6"
+    },
     "config": {
         "sort-packages": true
+    },
+    "scripts": {
+        "phpunit": "@php ./vendor/bin/phpunit --no-coverage --color=always",
+        "phpunit-coverage-text": "@php ./vendor/bin/phpunit --coverage-text --color=never",
+        "phpunit-coverage-file": "@php ./vendor/bin/phpunit --color=always"
     }
 }
