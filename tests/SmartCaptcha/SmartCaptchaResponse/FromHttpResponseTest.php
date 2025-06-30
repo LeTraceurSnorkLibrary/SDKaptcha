@@ -7,6 +7,7 @@ use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
+use RuntimeException;
 
 /**
  * @coversDefaultClass \LeTraceurSnork\UnofficialCaptchaSdk\SmartCaptcha\SmartCaptchaResponse
@@ -14,6 +15,10 @@ use Psr\Http\Message\StreamInterface;
 class FromHttpResponseTest extends TestCase
 {
     /**
+     * @covers ::__construct
+     * @covers ::getMessage
+     * @covers ::getHost
+     * @covers ::isSuccess
      * @covers ::fromHttpResponse
      *
      * @throws Exception
@@ -35,6 +40,33 @@ class FromHttpResponseTest extends TestCase
     }
 
     /**
+     * @covers ::__construct
+     * @covers ::getMessage
+     * @covers ::getHost
+     * @covers ::isSuccess
+     * @covers ::fromHttpResponse
+     *
+     * @throws Exception
+     * @return void
+     */
+    public function testFromHttpResponseSuccessOnlyStatus()
+    {
+        $httpResponse = $this->makePsr7Response(json_encode([
+            'status' => 'ok',
+        ]));
+
+        $response = SmartCaptchaResponse::fromHttpResponse($httpResponse);
+
+        $this->assertTrue($response->isSuccess());
+        $this->assertEquals('', $response->getMessage());
+        $this->assertNull($response->getHost());
+    }
+
+    /**
+     * @covers ::__construct
+     * @covers ::getMessage
+     * @covers ::getHost
+     * @covers ::isSuccess
      * @covers ::fromHttpResponse
      *
      * @throws Exception
@@ -56,6 +88,10 @@ class FromHttpResponseTest extends TestCase
     }
 
     /**
+     * @covers ::__construct
+     * @covers ::getMessage
+     * @covers ::getHost
+     * @covers ::isSuccess
      * @covers ::fromHttpResponse
      *
      * @throws Exception
@@ -63,7 +99,7 @@ class FromHttpResponseTest extends TestCase
      */
     public function testFromHttpResponseThrowsOnMalformedJson()
     {
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(RuntimeException::class);
 
         $httpResponse = $this->makePsr7Response('{not valid json');
 
@@ -71,6 +107,10 @@ class FromHttpResponseTest extends TestCase
     }
 
     /**
+     * @covers ::__construct
+     * @covers ::getMessage
+     * @covers ::getHost
+     * @covers ::isSuccess
      * @covers ::fromHttpResponse
      *
      * @throws Exception
@@ -78,7 +118,7 @@ class FromHttpResponseTest extends TestCase
      */
     public function testFromHttpResponseThrowsOnMissingStatus()
     {
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(RuntimeException::class);
 
         $httpResponse = $this->makePsr7Response(json_encode([
             'message' => 'we forgot status field',
