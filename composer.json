@@ -29,6 +29,7 @@
     },
     "require-dev": {
         "avto-dev/php-cs-fixer": "^1.6",
+        "php-coveralls/php-coveralls": "^0.1.0",
         "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^9"
     },
