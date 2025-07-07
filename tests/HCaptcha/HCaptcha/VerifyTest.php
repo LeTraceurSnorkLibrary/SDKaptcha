@@ -1,6 +1,6 @@
 <?php
 
-namespace HCaptcha\HCaptcha;
+namespace Tests\HCaptcha\HCaptcha;
 
 use DateTime;
 use GuzzleHttp\Psr7\Response;

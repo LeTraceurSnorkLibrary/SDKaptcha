@@ -1,6 +1,6 @@
 <?php
 
-namespace HCaptcha\HCaptcha;
+namespace Tests\HCaptcha\HCaptcha;
 
 use GuzzleHttp\Client;
 use LeTraceurSnork\Captcha\CaptchaException;

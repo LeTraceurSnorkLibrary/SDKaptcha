@@ -1,6 +1,6 @@
 <?php
 
-namespace SmartCaptcha\SmartCaptchaResponse;
+namespace Tests\SmartCaptcha\SmartCaptchaResponse;
 
 use LeTraceurSnork\UnofficialCaptchaSdk\SmartCaptcha\SmartCaptchaResponse;
 use PHPUnit\Framework\MockObject\Exception;

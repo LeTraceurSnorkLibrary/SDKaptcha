@@ -1,6 +1,6 @@
 <?php
 
-namespace HCaptcha\HCaptcha;
+namespace Tests\HCaptcha\HCaptcha;
 
 use LeTraceurSnork\UnofficialCaptchaSdk\HCaptcha\HCaptcha;
 use PHPUnit\Framework\TestCase;

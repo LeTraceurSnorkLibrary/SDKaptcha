@@ -1,6 +1,6 @@
 <?php
 
-namespace SmartCaptcha\SmartCaptcha;
+namespace Tests\SmartCaptcha\SmartCaptcha;
 
 use GuzzleHttp\Client;
 use LeTraceurSnork\Captcha\CaptchaException;
