@@ -42,6 +42,7 @@
         "phpstan": "@php ./vendor/bin/phpstan analyze -c phpstan.neon --no-progress --ansi --verbose",
         "phpunit": "@php ./vendor/bin/phpunit --no-coverage --color=always",
         "phpunit-coverage-text": "@php ./vendor/bin/phpunit --coverage-text --color=never",
-        "phpunit-coverage-file": "@php ./vendor/bin/phpunit --color=always"
+        "phpunit-coverage-file": "@php ./vendor/bin/phpunit --color=always",
+        "phpunit-clover": "@php ./vendor/bin/phpunit ./tests --no-coverage --color=always --coverage-clover tests/clover/report.xml"
     }
 }
