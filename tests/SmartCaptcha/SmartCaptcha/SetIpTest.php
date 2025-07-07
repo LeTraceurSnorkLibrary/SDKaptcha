@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\SmartCaptcha\SmartCaptcha;
+namespace SmartCaptcha\SmartCaptcha;
 
 use LeTraceurSnork\UnofficialCaptchaSdk\SmartCaptcha\SmartCaptcha;
 use PHPUnit\Framework\TestCase;

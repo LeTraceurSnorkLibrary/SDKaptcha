@@ -1,16 +1,16 @@
 <?php
 
-namespace SmartCaptcha\SmartCaptcha;
+namespace HCaptcha\HCaptcha;
 
 use GuzzleHttp\Client;
 use LeTraceurSnork\Captcha\CaptchaException;
-use LeTraceurSnork\UnofficialCaptchaSdk\SmartCaptcha\SmartCaptcha;
+use LeTraceurSnork\UnofficialCaptchaSdk\HCaptcha\HCaptcha;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
 use ReflectionClass;
 
 /**
- * @coversDefaultClass \LeTraceurSnork\UnofficialCaptchaSdk\SmartCaptcha\SmartCaptcha
+ * @coversDefaultClass \LeTraceurSnork\UnofficialCaptchaSdk\HCaptcha\HCaptcha
  */
 class ConstructorTest extends TestCase
 {
@@ -20,7 +20,7 @@ class ConstructorTest extends TestCase
     public function testThrowsExceptionWhenServerKeyIsEmpty()
     {
         $this->expectException(CaptchaException::class);
-        new SmartCaptcha('');
+        new HCaptcha('');
     }
 
     /**
@@ -28,9 +28,9 @@ class ConstructorTest extends TestCase
      */
     public function testSuccess()
     {
-        $captcha    = new SmartCaptcha('secret');
+        $captcha    = new HCaptcha('secret');
         $reflection = new ReflectionClass($captcha);
-        $property   = $reflection->getProperty('serverKey');
+        $property   = $reflection->getProperty('secretKey');
         $property->setAccessible(true);
 
         $this->assertEquals('secret', $property->getValue($captcha));
@@ -42,7 +42,7 @@ class ConstructorTest extends TestCase
     public function testAcceptsCustomHttpClient()
     {
         $mockClient = $this->createMock(ClientInterface::class);
-        $captcha    = new SmartCaptcha('secret', $mockClient);
+        $captcha    = new HCaptcha('secret', $mockClient);
         $reflection = new ReflectionClass($captcha);
         $property   = $reflection->getProperty('httpClient');
         $property->setAccessible(true);
@@ -55,7 +55,7 @@ class ConstructorTest extends TestCase
      */
     public function testDefaultHttpClientIsGuzzle()
     {
-        $captcha    = new SmartCaptcha('secret');
+        $captcha    = new HCaptcha('secret');
         $reflection = new ReflectionClass($captcha);
         $property   = $reflection->getProperty('httpClient');
         $property->setAccessible(true);

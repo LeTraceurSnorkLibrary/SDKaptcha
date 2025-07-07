@@ -14,12 +14,12 @@ use RuntimeException;
 class SmartCaptcha implements CaptchaVerifierInterface
 {
     /**
-     * HTTP-method to request SITE_VERIFY_URL
+     * HTTP-method to request SITE_VERIFY_URL.
      */
     const HTTP_METHOD = 'POST';
 
     /**
-     * URL to verify captcha's response
+     * URL to verify captcha's response.
      */
     const SITE_VERIFY_URL = 'https://smartcaptcha.yandexcloud.net/validate';
 
@@ -29,7 +29,7 @@ class SmartCaptcha implements CaptchaVerifierInterface
     protected $serverKey;
 
     /**
-     * @var string User's IP
+     * @var string|null User's IP
      */
     protected $ip;
 

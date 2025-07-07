@@ -10,7 +10,7 @@ use LeTraceurSnork\Captcha\CaptchaResponseInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * Captcha-compatible response for hCaptcha service
+ * Captcha-compatible response for hCaptcha service.
  */
 class HCaptchaResponse implements CaptchaResponseInterface
 {
@@ -25,7 +25,7 @@ class HCaptchaResponse implements CaptchaResponseInterface
     protected $errorCodes = [];
 
     /**
-     * @var
+     * @var string
      */
     protected $hostname;
 
@@ -36,6 +36,7 @@ class HCaptchaResponse implements CaptchaResponseInterface
 
     /**
      * @deprecated
+     *
      * @var bool
      */
     protected $credit;
@@ -62,6 +63,7 @@ class HCaptchaResponse implements CaptchaResponseInterface
      * @param ResponseInterface $response
      *
      * @throws CaptchaException
+     *
      * @return HCaptchaResponse
      */
     public static function fromHttpResponse(ResponseInterface $response)
@@ -69,7 +71,7 @@ class HCaptchaResponse implements CaptchaResponseInterface
         $body = $response->getBody()->getContents();
         $data = json_decode($body, true);
 
-        if (is_null($data)) {
+        if ($data === null) {
             throw new CaptchaException('hCaptcha response could not be parsed as JSON.');
         }
         if (!isset($data['success'])) {
@@ -156,6 +158,7 @@ class HCaptchaResponse implements CaptchaResponseInterface
 
     /**
      * @deprecated
+     *
      * @return bool
      */
     public function getCredit()

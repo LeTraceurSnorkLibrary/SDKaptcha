@@ -1,60 +1,58 @@
 <?php
 
-namespace SmartCaptcha\SmartCaptcha;
+namespace HCaptcha\HCaptcha;
 
+use DateTime;
 use GuzzleHttp\Psr7\Response;
 use LeTraceurSnork\Captcha\CaptchaException;
-use LeTraceurSnork\UnofficialCaptchaSdk\SmartCaptcha\SmartCaptcha;
-use LeTraceurSnork\UnofficialCaptchaSdk\SmartCaptcha\SmartCaptchaResponse;
+use LeTraceurSnork\UnofficialCaptchaSdk\HCaptcha\HCaptcha;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
-use RuntimeException;
 use Teapot\StatusCode\Http;
 
 /**
- * @coversDefaultClass \LeTraceurSnork\UnofficialCaptchaSdk\SmartCaptcha\SmartCaptcha
+ * @coversDefaultClass \LeTraceurSnork\UnofficialCaptchaSdk\HCaptcha\HCaptcha
  */
 class VerifyTest extends TestCase
 {
     /**
+     * @covers ::__construct
      * @covers ::verify
      * @covers ::buildRequest
      */
-    public function testVerifyReturnsCaptchaResponseOnSuccess()
+    public function testVerifyReturnsHCaptchaResponseOnSuccess()
     {
         $mockClient   = $this->createMock(ClientInterface::class);
         $responseJson = json_encode([
-            'status'  => 'ok',
-            'message' => 'ok',
-            'host'    => 'host',
+            'success'      => true,
+            'challenge_ts' => (new DateTime())->format('Y-m-dTH:i:s'),
+            'hostname'     => 'host',
         ]);
         $mockResponse = new Response(Http::OK, [], $responseJson);
-
         $mockClient->method('sendRequest')->willReturn($mockResponse);
 
-        $captcha = (new SmartCaptcha('testkey', $mockClient))
-            ->setIp('0.0.0.0');
+        $captcha = new HCaptcha('secret', $mockClient);
         $result  = $captcha->verify('token');
 
-        $this->assertInstanceOf(SmartCaptchaResponse::class, $result);
         $this->assertTrue($result->isSuccess());
-        $this->assertEquals('ok', $result->getMessage());
         $this->assertEquals('host', $result->getHost());
     }
 
     /**
+     * @covers ::__construct
      * @covers ::verify
      */
     public function testVerifyThrowsIfTokenIsEmpty()
     {
-        $this->expectException(RuntimeException::class);
-        $captcha = new SmartCaptcha('key', $this->createMock(ClientInterface::class));
+        $this->expectException(CaptchaException::class);
+        $captcha = new HCaptcha('secret', $this->createMock(ClientInterface::class));
         $captcha->verify('');
     }
 
     /**
+     * @covers ::__construct
      * @covers ::verify
      * @covers ::buildRequest
      */
@@ -64,13 +62,14 @@ class VerifyTest extends TestCase
         $mockEx     = $this->createMock(ClientExceptionInterface::class);
         $mockClient->method('sendRequest')->willThrowException($mockEx);
 
-        $captcha = new SmartCaptcha('secret', $mockClient);
+        $captcha = new HCaptcha('secret', $mockClient);
         $this->expectException(CaptchaException::class);
 
         $captcha->verify('token');
     }
 
     /**
+     * @covers ::__construct
      * @covers ::verify
      * @covers ::buildRequest
      *
@@ -78,14 +77,15 @@ class VerifyTest extends TestCase
      */
     public function testVerifyThrowsCaptchaExceptionOnParsingError()
     {
-        $mockClient   = $this->createMock(ClientInterface::class);
+        $mockClient = $this->createMock(ClientInterface::class);
+
         $responseJson = json_encode([
-            'message' => 'no status field',
+            'hostname' => 'host',
         ]);
         $mockResponse = new Response(Http::OK, [], $responseJson);
         $mockClient->method('sendRequest')->willReturn($mockResponse);
 
-        $captcha = new SmartCaptcha('secret', $mockClient);
+        $captcha = new HCaptcha('secret', $mockClient);
         $this->expectException(CaptchaException::class);
 
         $captcha->verify('token');

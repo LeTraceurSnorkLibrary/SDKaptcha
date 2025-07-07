@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\SmartCaptcha\SmartCaptchaResponse;
+namespace SmartCaptcha\SmartCaptchaResponse;
 
 use LeTraceurSnork\UnofficialCaptchaSdk\SmartCaptcha\SmartCaptchaResponse;
 use PHPUnit\Framework\MockObject\Exception;
@@ -22,6 +22,7 @@ class FromHttpResponseTest extends TestCase
      * @covers ::fromHttpResponse
      *
      * @throws Exception
+     *
      * @return void
      */
     public function testFromHttpResponseSuccess()
@@ -47,6 +48,7 @@ class FromHttpResponseTest extends TestCase
      * @covers ::fromHttpResponse
      *
      * @throws Exception
+     *
      * @return void
      */
     public function testFromHttpResponseSuccessOnlyStatus()
@@ -70,6 +72,7 @@ class FromHttpResponseTest extends TestCase
      * @covers ::fromHttpResponse
      *
      * @throws Exception
+     *
      * @return void
      */
     public function testFromHttpResponseFail()
@@ -95,6 +98,7 @@ class FromHttpResponseTest extends TestCase
      * @covers ::fromHttpResponse
      *
      * @throws Exception
+     *
      * @return void
      */
     public function testFromHttpResponseThrowsOnMalformedJson()
@@ -114,6 +118,7 @@ class FromHttpResponseTest extends TestCase
      * @covers ::fromHttpResponse
      *
      * @throws Exception
+     *
      * @return void
      */
     public function testFromHttpResponseThrowsOnMissingStatus()
@@ -128,7 +133,10 @@ class FromHttpResponseTest extends TestCase
     }
 
     /**
+     * @param string $data
+     *
      * @throws Exception
+     *
      * @return ResponseInterface
      */
     private function makePsr7Response($data)

@@ -11,17 +11,17 @@ use Psr\Http\Client\ClientInterface;
 use RuntimeException;
 
 /**
- * Captcha-compatible hCaptcha verification service
+ * Captcha-compatible hCaptcha verification service.
  */
 class HCaptcha implements CaptchaVerifierInterface
 {
     /**
-     * HTTP-method to request SITE_VERIFY_URL
+     * HTTP-method to request SITE_VERIFY_URL.
      */
     const HTTP_METHOD = 'POST';
 
     /**
-     * URL to verify captcha's response
+     * URL to verify captcha's response.
      */
     const SITE_VERIFY_URL = 'https://hcaptcha.com/siteverify';
 
@@ -89,12 +89,13 @@ class HCaptcha implements CaptchaVerifierInterface
 
     /**
      * @inheritdoc
+     *
      * @return HCaptchaResponse
      */
     public function verify($token)
     {
         if (empty($token)) {
-            throw new RuntimeException('hCaptcha token cannot be empty.');
+            throw new CaptchaException('hCaptcha token cannot be empty.');
         }
 
         try {

@@ -28,13 +28,17 @@
         "teapot/status-code": "^1.0|^2.0"
     },
     "require-dev": {
-        "mockery/mockery": "^1.6",
+        "avto-dev/php-cs-fixer": "^1.6",
+        "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^9"
     },
     "config": {
         "sort-packages": true
     },
     "scripts": {
+        "php-cs-fixer-fix": "@php ./vendor/bin/cs-fix",
+        "php-cs-fixer-check": "@php ./vendor/bin/cs-fix --dry-run",
+        "phpstan": "@php ./vendor/bin/phpstan analyze -c phpstan.neon --no-progress --ansi --verbose",
         "phpunit": "@php ./vendor/bin/phpunit --no-coverage --color=always",
         "phpunit-coverage-text": "@php ./vendor/bin/phpunit --coverage-text --color=never",
         "phpunit-coverage-file": "@php ./vendor/bin/phpunit --color=always"

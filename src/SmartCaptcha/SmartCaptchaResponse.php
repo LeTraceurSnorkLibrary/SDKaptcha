@@ -19,7 +19,7 @@ class SmartCaptchaResponse implements CaptchaResponseInterface
     protected $message;
 
     /**
-     * @var string `host` field from server response
+     * @var string|null `host` field from server response
      */
     protected $host;
 
@@ -81,13 +81,14 @@ class SmartCaptchaResponse implements CaptchaResponseInterface
      * @param ResponseInterface $response
      *
      * @throws RuntimeException
-     * @return $this
+     *
+     * @return SmartCaptchaResponse
      */
     public static function fromHttpResponse(ResponseInterface $response)
     {
         $body = $response->getBody()->getContents();
         $data = \json_decode($body, true);
-        if (is_null($data)) {
+        if ($data === null) {
             throw new RuntimeException('SmartCaptcha response could not be parsed as JSON.');
         }
         if (!isset($data['status'])) {
