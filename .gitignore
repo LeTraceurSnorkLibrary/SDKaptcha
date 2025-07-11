@@ -5,5 +5,7 @@
 /vendor/
 
 # Cache and etc
+/tests/clover/
+/tests/report/
 *.cache
 *.lock

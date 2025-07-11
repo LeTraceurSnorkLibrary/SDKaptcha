@@ -1,0 +1,36 @@
+name: PHPUnit Tests with Coverage
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: pcov
+          tools: composer
+
+      - name: Install dependencies
+        run: |
+          composer install --prefer-dist --no-progress
+
+      - name: Run PHPUnit with coverage
+        run: composer phpunit-clover
+
+      - name: Upload coverage results to Coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        run: |
+          composer global require php-coveralls/php-coveralls
+          php-coveralls --coverage_clover=tests/clover/report.xml --json_path=tests/coveralls-upload.json -v
