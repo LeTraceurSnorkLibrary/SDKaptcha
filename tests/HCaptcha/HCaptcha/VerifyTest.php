@@ -37,7 +37,7 @@ class VerifyTest extends TestCase
         $result  = $captcha->verify('token');
 
         $this->assertTrue($result->isSuccess());
-        $this->assertEquals('host', $result->getHost());
+        $this->assertEquals('host', $result->getHostname());
     }
 
     /**

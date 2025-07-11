@@ -18,17 +18,4 @@ class HostTest extends TestCase
         $response = new SmartCaptchaResponse(true, 'irrelevant');
         $this->assertNull($response->getHost());
     }
-
-    /**
-     * @covers ::setHost
-     * @covers ::getHost
-     */
-    public function testSetHostAssignsHostAndGetHostReturnsIt()
-    {
-        $response = new SmartCaptchaResponse(true, 'irrelevant');
-        $result   = $response->setHost('test.host');
-
-        $this->assertSame($response, $result, 'setHost should return $this');
-        $this->assertEquals('test.host', $response->getHost());
-    }
 }

@@ -64,18 +64,6 @@ class SmartCaptchaResponse implements CaptchaResponseInterface
     }
 
     /**
-     * @param string $host
-     *
-     * @return $this
-     */
-    public function setHost($host)
-    {
-        $this->host = $host;
-
-        return $this;
-    }
-
-    /**
      * Self-factory from PSR-7 Response.
      *
      * @param ResponseInterface $response
@@ -109,5 +97,17 @@ class SmartCaptchaResponse implements CaptchaResponseInterface
         }
 
         return $captcha_response;
+    }
+
+    /**
+     * @param string $host
+     *
+     * @return $this
+     */
+    protected function setHost($host)
+    {
+        $this->host = $host;
+
+        return $this;
     }
 }

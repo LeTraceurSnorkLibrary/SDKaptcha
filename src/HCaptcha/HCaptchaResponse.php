@@ -16,6 +16,7 @@ class HCaptchaResponse implements CaptchaResponseInterface
 {
     /**
      * @var bool
+     * @readonly
      */
     protected $isSuccess;
 
@@ -25,29 +26,29 @@ class HCaptchaResponse implements CaptchaResponseInterface
     protected $errorCodes = [];
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $hostname;
 
     /**
-     * @var DateTimeInterface
+     * @var DateTimeInterface|null
      */
     protected $challengeTimestamp;
 
     /**
      * @deprecated
      *
-     * @var bool
+     * @var bool|null
      */
     protected $credit;
 
     /**
-     * @var float
+     * @var float|null
      */
     protected $score;
 
     /**
-     * @var string[]
+     * @var string[]|null
      */
     protected $score_reason;
 
@@ -146,11 +147,17 @@ class HCaptchaResponse implements CaptchaResponseInterface
         return $this->errorCodes;
     }
 
-    public function getHost()
+    /**
+     * @return string|null
+     */
+    public function getHostname()
     {
         return $this->hostname;
     }
 
+    /**
+     * @return DateTimeInterface|null
+     */
     public function getChallengeTimestamp()
     {
         return $this->challengeTimestamp;
@@ -159,11 +166,27 @@ class HCaptchaResponse implements CaptchaResponseInterface
     /**
      * @deprecated
      *
-     * @return bool
+     * @return bool|null
      */
     public function getCredit()
     {
         return $this->credit;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getScore()
+    {
+        return $this->score;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getScoreReason()
+    {
+        return $this->score_reason;
     }
 
     /**
