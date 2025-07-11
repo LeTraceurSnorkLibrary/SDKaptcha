@@ -18,7 +18,7 @@ use RuntimeException;
  */
 class ReCaptcha implements CaptchaVerifierInterface
 {
-    const HTTP_METHOD = 'POST';
+    const HTTP_METHOD     = 'POST';
     const SITE_VERIFY_URL = 'https://www.google.com/recaptcha/api/siteverify';
 
     /**
@@ -60,7 +60,7 @@ class ReCaptcha implements CaptchaVerifierInterface
         $this->httpClient = isset($client)
             ? $client
             : new Client([
-                'timeout' => 5,
+                'timeout'         => 5,
                 'connect_timeout' => 5,
             ]);
     }
@@ -69,11 +69,13 @@ class ReCaptcha implements CaptchaVerifierInterface
      * Set user's IP.
      *
      * @param string $ip
+     *
      * @return $this
      */
     public function setIp($ip)
     {
         $this->ip = $ip;
+
         return $this;
     }
 
@@ -81,11 +83,13 @@ class ReCaptcha implements CaptchaVerifierInterface
      * Set expected action (v3 only).
      *
      * @param string $action
+     *
      * @return $this
      */
     public function setExpectedAction($action)
     {
         $this->action = $action;
+
         return $this;
     }
 
@@ -93,49 +97,32 @@ class ReCaptcha implements CaptchaVerifierInterface
      * Set expected score threshold (v3 only, 0..1).
      *
      * @param float $score
+     *
      * @return $this
      */
     public function setScoreThreshold($score)
     {
         $this->scoreThreshold = (float)$score;
+
         return $this;
     }
 
     /**
      * @inheritdoc
+     *
+     * @return ReCaptchaResponse
      */
     public function verify($token)
     {
         if (empty($token)) {
-            throw new RuntimeException('Google ReCaptcha token cannot be empty.');
+            throw new CaptchaException('Google ReCaptcha token cannot be empty.');
         }
 
         try {
             $request  = $this->buildRequest($token);
             $response = $this->httpClient->sendRequest($request);
-            $body = (string)$response->getBody();
-            $result = json_decode($body, true);
 
-            if (!is_array($result)) {
-                throw new CaptchaException('ReCaptcha: Invalid API response format');
-            }
-
-            // Базовая проверка
-            if (empty($result['success'])) {
-                throw new CaptchaException('ReCaptcha: Verification failed' . (isset($result['error-codes']) ? (' (' . implode(',', $result['error-codes']) . ')') : ''));
-            }
-
-            // Если выставлены action / threshold (reCAPTCHA v3)
-            if ($this->action !== null && isset($result['action']) && $result['action'] !== $this->action) {
-                throw new CaptchaException('ReCaptcha: Action mismatch (expected: ' . $this->action . ', got: ' . $result['action'] . ')');
-            }
-
-            if ($this->scoreThreshold !== null && isset($result['score']) && $result['score'] < $this->scoreThreshold) {
-                throw new CaptchaException('ReCaptcha: Score threshold not met (minimum: ' . $this->scoreThreshold . ', got: ' . $result['score'] . ')');
-            }
-
-            // Возвращает массив (или по месту реализовать ваш интерфейс CaptchaResponseInterface)
-            return $result;
+            return ReCaptchaResponse::fromHttpResponse($response);
         } catch (ClientExceptionInterface $e) {
             throw new CaptchaException('ReCaptcha HTTP error: ' . $e->getMessage(), 0, $e);
         } catch (RuntimeException $e) {
@@ -147,6 +134,7 @@ class ReCaptcha implements CaptchaVerifierInterface
      * Builds PSR-7 compatible HTTP-Request.
      *
      * @param string $token
+     *
      * @return RequestInterface
      */
     protected function buildRequest($token)

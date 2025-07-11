@@ -83,11 +83,11 @@ class SmartCaptchaResponse implements CaptchaResponseInterface
             throw new RuntimeException('Malformed SmartCaptcha response: no "status" field.');
         }
 
-        $isSuccess        = $data['status'] === 'ok';
+        $is_success       = $data['status'] === 'ok';
         $message          = isset($data['message'])
             ? $data['message']
             : '';
-        $captcha_response = new self($isSuccess, $message);
+        $captcha_response = new self($is_success, $message);
 
         $host = isset($data['host'])
             ? $data['host']

@@ -79,8 +79,8 @@ class HCaptchaResponse implements CaptchaResponseInterface
             throw new CaptchaException('Malformed hCaptcha response: no "success" field.');
         }
 
-        $isSuccess = (bool)$data['success'];
-        $response  = (new self($isSuccess));
+        $isSuccess       = (bool)$data['success'];
+        $captchaResponse = (new self($isSuccess));
 
         $challengeTs = isset($data['challenge_ts'])
             ? (string)$data['challenge_ts']
@@ -88,7 +88,7 @@ class HCaptchaResponse implements CaptchaResponseInterface
         if (isset($challengeTs)) {
             try {
                 $challengeTimestamp = new DateTime($challengeTs);
-                $response->setChallengeTimestamp($challengeTimestamp);
+                $captchaResponse->setChallengeTimestamp($challengeTimestamp);
             } catch (Exception $e) {
             }
         }
@@ -97,38 +97,38 @@ class HCaptchaResponse implements CaptchaResponseInterface
             ? (string)$data['hostname']
             : null;
         if (isset($hostname)) {
-            $response->setHostname($hostname);
+            $captchaResponse->setHostname($hostname);
         }
 
         $credit = isset($data['credit'])
             ? (bool)$data['credit']
             : null;
         if (isset($credit)) {
-            $response->setCredit($credit);
+            $captchaResponse->setCredit($credit);
         }
 
         $errorCodes = isset($data['error-codes'])
             ? (array)$data['error-codes']
             : null;
         if (isset($errorCodes)) {
-            $response->setErrorCodes($errorCodes);
+            $captchaResponse->setErrorCodes($errorCodes);
         }
 
         $score = isset($data['score'])
             ? (float)$data['score']
             : null;
         if (isset($score)) {
-            $response->setScore($score);
+            $captchaResponse->setScore($score);
         }
 
         $scoreReason = isset($data['score_reason'])
             ? (array)$data['score_reason']
             : null;
         if (isset($scoreReason)) {
-            $response->setScoreReason($scoreReason);
+            $captchaResponse->setScoreReason($scoreReason);
         }
 
-        return $response;
+        return $captchaResponse;
     }
 
     /**
