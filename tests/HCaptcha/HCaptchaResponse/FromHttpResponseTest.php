@@ -126,6 +126,7 @@ class FromHttpResponseTest extends TestCase
      * @param string $data
      *
      * @throws PHPUnitException
+     *
      * @return ResponseInterface
      */
     private function makePsr7Response($data)

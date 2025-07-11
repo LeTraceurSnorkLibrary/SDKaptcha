@@ -16,6 +16,7 @@ class ReCaptchaResponse implements CaptchaResponseInterface
 {
     /**
      * @var bool
+     *
      * @readonly
      */
     protected $isSuccess;
@@ -54,11 +55,12 @@ class ReCaptchaResponse implements CaptchaResponseInterface
     }
 
     /**
-     * Создание объекта из PSR-7 Response
+     * Self-factory from PSR-7 Response.
      *
      * @param ResponseInterface $response
      *
      * @throws CaptchaException
+     *
      * @return ReCaptchaResponse
      */
     public static function fromHttpResponse(ResponseInterface $response)
@@ -84,7 +86,7 @@ class ReCaptchaResponse implements CaptchaResponseInterface
             try {
                 $challengeTimestamp = new DateTime($challengeTs);
                 $captchaResponse->setChallengeTs($challengeTimestamp);
-            } catch (Exception $e) {
+            } catch (Exception $e) { // @codeCoverageIgnore
             }
         }
 

@@ -24,20 +24,28 @@ class FromHttpResponseTest extends TestCase
      * @covers ::getErrorCodes
      * @covers ::getHostname
      * @covers ::getChallengeTs
+     * @covers ::getScore
+     * @covers ::getAction
      * @covers ::setErrorCodes
      * @covers ::setHostname
      * @covers ::setChallengeTs
+     * @covers ::setScore
+     * @covers ::setAction
      */
     public function testFromHttpResponseSuccess()
     {
         $hostname     = $this->faker->domainName();
         $challenge_ts = $this->faker->date('c');
         $error_codes  = [$this->faker->randomNumber(), $this->faker->randomNumber()];
+        $score        = $this->faker->randomFloat(2, 0, 1);
+        $action       = $this->faker->word();
         $json         = json_encode([
             'success'      => true,
             'hostname'     => $hostname,
             'challenge_ts' => $challenge_ts,
             'error-codes'  => $error_codes,
+            'score'        => $score,
+            'action'       => $action,
         ]);
         $httpResponse = $this->makePsr7Response($json);
 
@@ -47,6 +55,8 @@ class FromHttpResponseTest extends TestCase
         $this->assertEquals($hostname, $response->getHostname());
         $this->assertEquals($challenge_ts, $response->getChallengeTs()->format('c'));
         $this->assertEquals($error_codes, $response->getErrorCodes());
+        $this->assertEquals($score, $response->getScore());
+        $this->assertEquals($action, $response->getAction());
     }
 
     /**
@@ -55,9 +65,13 @@ class FromHttpResponseTest extends TestCase
      * @covers ::getErrorCodes
      * @covers ::getHostname
      * @covers ::getChallengeTs
+     * @covers ::getScore
+     * @covers ::getAction
      * @covers ::setErrorCodes
      * @covers ::setHostname
      * @covers ::setChallengeTs
+     * @covers ::setScore
+     * @covers ::setAction
      */
     public function testFromHttpResponseWithMinimalFields()
     {
@@ -72,6 +86,8 @@ class FromHttpResponseTest extends TestCase
         $this->assertEquals([], $response->getErrorCodes());
         $this->assertNull($response->getHostname());
         $this->assertNull($response->getChallengeTs());
+        $this->assertNull($response->getScore());
+        $this->assertNull($response->getAction());
     }
 
     /**
@@ -102,6 +118,7 @@ class FromHttpResponseTest extends TestCase
      * @param string $data
      *
      * @throws PHPUnitException
+     *
      * @return ResponseInterface
      */
     private function makePsr7Response($data)

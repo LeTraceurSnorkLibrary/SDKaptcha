@@ -16,6 +16,7 @@ class HCaptchaResponse implements CaptchaResponseInterface
 {
     /**
      * @var bool
+     *
      * @readonly
      */
     protected $isSuccess;
@@ -61,6 +62,8 @@ class HCaptchaResponse implements CaptchaResponseInterface
     }
 
     /**
+     * Self-factory from PSR-7 Response.
+     *
      * @param ResponseInterface $response
      *
      * @throws CaptchaException
@@ -89,7 +92,7 @@ class HCaptchaResponse implements CaptchaResponseInterface
             try {
                 $challengeTimestamp = new DateTime($challengeTs);
                 $captchaResponse->setChallengeTimestamp($challengeTimestamp);
-            } catch (Exception $e) {
+            } catch (Exception $e) { // @codeCoverageIgnore
             }
         }
 
