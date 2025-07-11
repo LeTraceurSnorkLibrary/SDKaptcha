@@ -1,5 +1,7 @@
 # SDKaptcha
 
+[![Coverage Status](https://coveralls.io/repos/github/LeTraceurSnorkLibrary/unofficial-captcha-sdk/badge.svg?branch=main)](https://coveralls.io/github/LeTraceurSnorkLibrary/unofficial-captcha-sdk?branch=main)
+
 Unofficial SDK for different Captcha external providers
 
 ## Installation
