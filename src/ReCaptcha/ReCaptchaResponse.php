@@ -36,6 +36,16 @@ class ReCaptchaResponse implements CaptchaResponseInterface
     protected $challengeTs;
 
     /**
+     * @var float|null
+     */
+    protected $score;
+
+    /**
+     * @var string|null
+     */
+    protected $action;
+
+    /**
      * @param bool $isSuccess
      */
     public function __construct($isSuccess)
@@ -92,6 +102,20 @@ class ReCaptchaResponse implements CaptchaResponseInterface
             $captchaResponse->setErrorCodes($errorCodes);
         }
 
+        $score = isset($data['score'])
+            ? (float)$data['score']
+            : null;
+        if (isset($score)) {
+            $captchaResponse->setScore($score);
+        }
+
+        $action = isset($data['action'])
+            ? (string)$data['action']
+            : null;
+        if (isset($action)) {
+            $captchaResponse->setAction($action);
+        }
+
         return $captchaResponse;
     }
 
@@ -128,6 +152,22 @@ class ReCaptchaResponse implements CaptchaResponseInterface
     }
 
     /**
+     * @return float|null
+     */
+    public function getScore()
+    {
+        return $this->score;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAction()
+    {
+        return $this->action;
+    }
+
+    /**
      * @param string[] $errorCodes
      *
      * @return $this
@@ -159,6 +199,30 @@ class ReCaptchaResponse implements CaptchaResponseInterface
     protected function setChallengeTs($timestamp)
     {
         $this->challengeTs = $timestamp;
+
+        return $this;
+    }
+
+    /**
+     * @param float $score
+     *
+     * @return $this
+     */
+    protected function setScore($score)
+    {
+        $this->score = $score;
+
+        return $this;
+    }
+
+    /**
+     * @param string $action
+     *
+     * @return $this
+     */
+    protected function setAction($action)
+    {
+        $this->action = $action;
 
         return $this;
     }
