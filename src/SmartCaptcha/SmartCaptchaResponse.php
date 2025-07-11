@@ -1,6 +1,6 @@
 <?php
 
-namespace LeTraceurSnork\UnofficialCaptchaSdk\SmartCaptcha;
+namespace LeTraceurSnork\SDKaptcha\SmartCaptcha;
 
 use LeTraceurSnork\Captcha\CaptchaResponseInterface;
 use Psr\Http\Message\ResponseInterface;

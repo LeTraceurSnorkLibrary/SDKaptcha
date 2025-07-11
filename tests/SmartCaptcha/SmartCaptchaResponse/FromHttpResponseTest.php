@@ -2,7 +2,7 @@
 
 namespace Tests\SmartCaptcha\SmartCaptchaResponse;
 
-use LeTraceurSnork\UnofficialCaptchaSdk\SmartCaptcha\SmartCaptchaResponse;
+use LeTraceurSnork\SDKaptcha\SmartCaptcha\SmartCaptchaResponse;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
@@ -10,7 +10,7 @@ use Psr\Http\Message\StreamInterface;
 use RuntimeException;
 
 /**
- * @coversDefaultClass \LeTraceurSnork\UnofficialCaptchaSdk\SmartCaptcha\SmartCaptchaResponse
+ * @coversDefaultClass \LeTraceurSnork\SDKaptcha\SmartCaptcha\SmartCaptchaResponse
  */
 class FromHttpResponseTest extends TestCase
 {

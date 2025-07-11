@@ -2,13 +2,13 @@
 
 namespace Tests\ReCaptcha\ReCaptcha;
 
-use LeTraceurSnork\UnofficialCaptchaSdk\ReCaptcha\ReCaptcha;
+use LeTraceurSnork\SDKaptcha\ReCaptcha\ReCaptcha;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionException;
 
 /**
- * @coversDefaultClass \LeTraceurSnork\UnofficialCaptchaSdk\ReCaptcha\ReCaptcha
+ * @coversDefaultClass \LeTraceurSnork\SDKaptcha\ReCaptcha\ReCaptcha
  */
 class SettersTest extends TestCase
 {

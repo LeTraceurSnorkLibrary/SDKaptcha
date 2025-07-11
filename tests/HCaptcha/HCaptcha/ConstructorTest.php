@@ -4,13 +4,13 @@ namespace Tests\HCaptcha\HCaptcha;
 
 use GuzzleHttp\Client;
 use LeTraceurSnork\Captcha\CaptchaException;
-use LeTraceurSnork\UnofficialCaptchaSdk\HCaptcha\HCaptcha;
+use LeTraceurSnork\SDKaptcha\HCaptcha\HCaptcha;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
 use ReflectionClass;
 
 /**
- * @coversDefaultClass \LeTraceurSnork\UnofficialCaptchaSdk\HCaptcha\HCaptcha
+ * @coversDefaultClass \LeTraceurSnork\SDKaptcha\HCaptcha\HCaptcha
  */
 class ConstructorTest extends TestCase
 {

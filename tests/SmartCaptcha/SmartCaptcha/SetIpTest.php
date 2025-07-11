@@ -2,12 +2,12 @@
 
 namespace Tests\SmartCaptcha\SmartCaptcha;
 
-use LeTraceurSnork\UnofficialCaptchaSdk\SmartCaptcha\SmartCaptcha;
+use LeTraceurSnork\SDKaptcha\SmartCaptcha\SmartCaptcha;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
 /**
- * @coversDefaultClass \LeTraceurSnork\UnofficialCaptchaSdk\SmartCaptcha\SmartCaptcha
+ * @coversDefaultClass \LeTraceurSnork\SDKaptcha\SmartCaptcha\SmartCaptcha
  */
 class SetIpTest extends TestCase
 {

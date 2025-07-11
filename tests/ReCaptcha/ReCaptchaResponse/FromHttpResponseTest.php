@@ -3,7 +3,7 @@
 namespace Tests\ReCaptcha\ReCaptchaResponse;
 
 use LeTraceurSnork\Captcha\CaptchaException;
-use LeTraceurSnork\UnofficialCaptchaSdk\ReCaptcha\ReCaptchaResponse;
+use LeTraceurSnork\SDKaptcha\ReCaptcha\ReCaptchaResponse;
 use PHPUnit\Framework\MockObject\Exception as PHPUnitException;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
@@ -11,7 +11,7 @@ use Psr\Http\Message\StreamInterface;
 use Tests\WithFaker;
 
 /**
- * @coversDefaultClass \LeTraceurSnork\UnofficialCaptchaSdk\ReCaptcha\ReCaptchaResponse
+ * @coversDefaultClass \LeTraceurSnork\SDKaptcha\ReCaptcha\ReCaptchaResponse
  */
 class FromHttpResponseTest extends TestCase
 {

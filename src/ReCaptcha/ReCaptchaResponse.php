@@ -1,6 +1,6 @@
 <?php
 
-namespace LeTraceurSnork\UnofficialCaptchaSdk\ReCaptcha;
+namespace LeTraceurSnork\SDKaptcha\ReCaptcha;
 
 use DateTime;
 use DateTimeInterface;

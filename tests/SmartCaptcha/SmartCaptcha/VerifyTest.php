@@ -4,8 +4,8 @@ namespace Tests\SmartCaptcha\SmartCaptcha;
 
 use GuzzleHttp\Psr7\Response;
 use LeTraceurSnork\Captcha\CaptchaException;
-use LeTraceurSnork\UnofficialCaptchaSdk\SmartCaptcha\SmartCaptcha;
-use LeTraceurSnork\UnofficialCaptchaSdk\SmartCaptcha\SmartCaptchaResponse;
+use LeTraceurSnork\SDKaptcha\SmartCaptcha\SmartCaptcha;
+use LeTraceurSnork\SDKaptcha\SmartCaptcha\SmartCaptchaResponse;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientExceptionInterface;
@@ -14,7 +14,7 @@ use RuntimeException;
 use Teapot\StatusCode\Http;
 
 /**
- * @coversDefaultClass \LeTraceurSnork\UnofficialCaptchaSdk\SmartCaptcha\SmartCaptcha
+ * @coversDefaultClass \LeTraceurSnork\SDKaptcha\SmartCaptcha\SmartCaptcha
  */
 class VerifyTest extends TestCase
 {

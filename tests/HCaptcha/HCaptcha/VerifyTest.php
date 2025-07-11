@@ -5,7 +5,7 @@ namespace Tests\HCaptcha\HCaptcha;
 use DateTime;
 use GuzzleHttp\Psr7\Response;
 use LeTraceurSnork\Captcha\CaptchaException;
-use LeTraceurSnork\UnofficialCaptchaSdk\HCaptcha\HCaptcha;
+use LeTraceurSnork\SDKaptcha\HCaptcha\HCaptcha;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientExceptionInterface;
@@ -13,7 +13,7 @@ use Psr\Http\Client\ClientInterface;
 use Teapot\StatusCode\Http;
 
 /**
- * @coversDefaultClass \LeTraceurSnork\UnofficialCaptchaSdk\HCaptcha\HCaptcha
+ * @coversDefaultClass \LeTraceurSnork\SDKaptcha\HCaptcha\HCaptcha
  */
 class VerifyTest extends TestCase
 {
