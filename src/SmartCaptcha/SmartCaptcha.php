@@ -1,6 +1,6 @@
 <?php
 
-namespace LeTraceurSnork\UnofficialCaptchaSdk\SmartCaptcha;
+namespace LeTraceurSnork\SDKaptcha\SmartCaptcha;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;

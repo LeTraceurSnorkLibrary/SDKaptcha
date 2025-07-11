@@ -2,13 +2,13 @@
 
 namespace Tests\HCaptcha\HCaptcha;
 
-use LeTraceurSnork\UnofficialCaptchaSdk\HCaptcha\HCaptcha;
+use LeTraceurSnork\SDKaptcha\HCaptcha\HCaptcha;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionException;
 
 /**
- * @coversDefaultClass \LeTraceurSnork\UnofficialCaptchaSdk\HCaptcha\HCaptcha
+ * @coversDefaultClass \LeTraceurSnork\SDKaptcha\HCaptcha\HCaptcha
  */
 class SettersTest extends TestCase
 {

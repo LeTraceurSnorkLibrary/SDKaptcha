@@ -1,6 +1,6 @@
 <?php
 
-namespace LeTraceurSnork\UnofficialCaptchaSdk\ReCaptcha;
+namespace LeTraceurSnork\SDKaptcha\ReCaptcha;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
