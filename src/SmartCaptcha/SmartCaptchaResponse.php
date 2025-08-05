@@ -29,12 +29,12 @@ class SmartCaptchaResponse implements CaptchaResponseInterface
     protected $host;
 
     /**
-     * @param bool   $success
+     * @param bool   $isStatusOk
      * @param string $message
      */
-    public function __construct($success, $message = '')
+    public function __construct($isStatusOk, $message = '')
     {
-        $this->isStatusOk = $success;
+        $this->isStatusOk = $isStatusOk;
         $this->message    = $message;
     }
 
