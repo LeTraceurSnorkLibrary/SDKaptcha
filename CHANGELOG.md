@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ---
 
+## v1.1.0 - 2025-08-05
+
+### Changed
+
+- `SmartCaptchaResponse` now handles an empty 'host' field: if the 'host' field is empty while 'status': 'ok', such a response is now considered falsy and `isSuccess()` returns false. See why: [point 3](https://yandex.cloud/ru/docs/smartcaptcha/concepts/validation#service-response) ([@LeTraceurSnork])
+
 ## v1.0.0 - 2025-07-11
 
 ### Added
