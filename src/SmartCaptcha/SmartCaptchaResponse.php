@@ -9,9 +9,14 @@ use RuntimeException;
 class SmartCaptchaResponse implements CaptchaResponseInterface
 {
     /**
-     * @var bool boolean interpretation of `status` field from server response
+     * @var bool Whether CAPTCHA's response is ACTUALLY a success (user recognized as not-a-bot)
      */
     protected $isSuccess;
+
+    /**
+     * @var bool boolean interpretation of `status` field from server response
+     */
+    protected $isStatusOk;
 
     /**
      * @var string `message` field from server response
@@ -29,16 +34,33 @@ class SmartCaptchaResponse implements CaptchaResponseInterface
      */
     public function __construct($success, $message = '')
     {
-        $this->isSuccess = $success;
-        $this->message   = $message;
+        $this->isStatusOk = $success;
+        $this->message    = $message;
     }
 
     /**
      * @inheritDoc
+     *
+     * According to SmartCaptcha internal rules, a `status` of "ok" MAY be returned even if the user is a bot —
+     * for example, when a `Block cloud` event is triggered (e.g., the SmartCaptcha account is unpaid).
+     * In this case, the response will look like {'status': "ok", 'host': ""}.
+     * However, this response is misleading and may create a false impression that the captcha has been passed.
+     *
+     * @link https://yandex.cloud/ru/docs/smartcaptcha/concepts/validation#service-response
      */
     public function isSuccess()
     {
-        return $this->isSuccess;
+        return $this->isStatusOk() && !empty($this->getHost());
+    }
+
+    /**
+     * Returns true if 'status' field is "ok", false otherwise
+     *
+     * @return bool
+     */
+    public function isStatusOk()
+    {
+        return $this->isStatusOk;
     }
 
     /**
@@ -83,20 +105,20 @@ class SmartCaptchaResponse implements CaptchaResponseInterface
             throw new RuntimeException('Malformed SmartCaptcha response: no "status" field.');
         }
 
-        $is_success       = $data['status'] === 'ok';
+        $isStatusOk       = $data['status'] === 'ok';
         $message          = isset($data['message'])
             ? $data['message']
             : '';
-        $captcha_response = new self($is_success, $message);
+        $captchaResponse = new self($isStatusOk, $message);
 
         $host = isset($data['host'])
             ? $data['host']
             : null;
         if (isset($host)) {
-            $captcha_response->setHost($host);
+            $captchaResponse->setHost($host);
         }
 
-        return $captcha_response;
+        return $captchaResponse;
     }
 
     /**
