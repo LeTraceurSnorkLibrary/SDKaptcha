@@ -54,7 +54,7 @@ class SmartCaptchaResponse implements CaptchaResponseInterface
     }
 
     /**
-     * Returns true if 'status' field is "ok", false otherwise
+     * Returns true if 'status' field is "ok", false otherwise.
      *
      * @return bool
      */
