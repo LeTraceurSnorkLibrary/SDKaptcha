@@ -18,6 +18,7 @@ class FromHttpResponseTest extends TestCase
      * @covers ::__construct
      * @covers ::getMessage
      * @covers ::getHost
+     * @covers ::isStatusOk
      * @covers ::isSuccess
      * @covers ::fromHttpResponse
      *
@@ -36,14 +37,41 @@ class FromHttpResponseTest extends TestCase
         $response = SmartCaptchaResponse::fromHttpResponse($httpResponse);
 
         $this->assertTrue($response->isSuccess());
+        $this->assertTrue($response->isStatusOk());
         $this->assertEquals('ok', $response->getMessage());
         $this->assertEquals('testhost', $response->getHost());
     }
 
     /**
      * @covers ::__construct
+     * @covers ::getHost
+     * @covers ::isStatusOk
+     * @covers ::isSuccess
+     * @covers ::fromHttpResponse
+     *
+     * @throws Exception
+     *
+     * @return void
+     */
+    public function testFromHttpResponseEmptyHost()
+    {
+        $httpResponse = $this->makePsr7Response(json_encode([
+            'status'  => 'ok',
+            'host'    => '',
+        ]));
+
+        $response = SmartCaptchaResponse::fromHttpResponse($httpResponse);
+
+        $this->assertFalse($response->isSuccess());
+        $this->assertTrue($response->isStatusOk());
+        $this->assertEquals('', $response->getHost());
+    }
+
+    /**
+     * @covers ::__construct
      * @covers ::getMessage
      * @covers ::getHost
+     * @covers ::isStatusOk
      * @covers ::isSuccess
      * @covers ::fromHttpResponse
      *
@@ -59,7 +87,8 @@ class FromHttpResponseTest extends TestCase
 
         $response = SmartCaptchaResponse::fromHttpResponse($httpResponse);
 
-        $this->assertTrue($response->isSuccess());
+        $this->assertFalse($response->isSuccess());
+        $this->assertTrue($response->isStatusOk());
         $this->assertEquals('', $response->getMessage());
         $this->assertNull($response->getHost());
     }
@@ -68,6 +97,7 @@ class FromHttpResponseTest extends TestCase
      * @covers ::__construct
      * @covers ::getMessage
      * @covers ::getHost
+     * @covers ::isStatusOk
      * @covers ::isSuccess
      * @covers ::fromHttpResponse
      *
@@ -86,15 +116,13 @@ class FromHttpResponseTest extends TestCase
         $response = SmartCaptchaResponse::fromHttpResponse($httpResponse);
 
         $this->assertFalse($response->isSuccess());
+        $this->assertFalse($response->isStatusOk());
         $this->assertEquals('bad captcha', $response->getMessage());
         $this->assertNull($response->getHost());
     }
 
     /**
      * @covers ::__construct
-     * @covers ::getMessage
-     * @covers ::getHost
-     * @covers ::isSuccess
      * @covers ::fromHttpResponse
      *
      * @throws Exception
@@ -112,9 +140,6 @@ class FromHttpResponseTest extends TestCase
 
     /**
      * @covers ::__construct
-     * @covers ::getMessage
-     * @covers ::getHost
-     * @covers ::isSuccess
      * @covers ::fromHttpResponse
      *
      * @throws Exception
