@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ---
 
+## v1.1.1 - 2025-08-08
+
+### Changed
+
+- Service files have been removed from release
+- Thrown exceptions of type `RuntimeException` have been specified (narrowed) to `CaptchaException` ([@LeTraceurSnork])
+
 ## v1.1.0 - 2025-08-05
 
 ### Changed
