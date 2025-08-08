@@ -49,7 +49,7 @@ class VerifyTest extends TestCase
      */
     public function testVerifyThrowsIfTokenIsEmpty()
     {
-        $this->expectException(RuntimeException::class);
+        $this->expectException(CaptchaException::class);
         $captcha = new SmartCaptcha('key', $this->createMock(ClientInterface::class));
         $captcha->verify('');
     }

@@ -2,6 +2,7 @@
 
 namespace LeTraceurSnork\SDKaptcha\SmartCaptcha;
 
+use LeTraceurSnork\Captcha\CaptchaException;
 use LeTraceurSnork\Captcha\CaptchaResponseInterface;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
@@ -90,7 +91,7 @@ class SmartCaptchaResponse implements CaptchaResponseInterface
      *
      * @param ResponseInterface $response
      *
-     * @throws RuntimeException
+     * @throws CaptchaException
      *
      * @return SmartCaptchaResponse
      */
@@ -99,10 +100,10 @@ class SmartCaptchaResponse implements CaptchaResponseInterface
         $body = $response->getBody()->getContents();
         $data = \json_decode($body, true);
         if ($data === null) {
-            throw new RuntimeException('SmartCaptcha response could not be parsed as JSON.');
+            throw new CaptchaException('SmartCaptcha response could not be parsed as JSON.');
         }
         if (!isset($data['status'])) {
-            throw new RuntimeException('Malformed SmartCaptcha response: no "status" field.');
+            throw new CaptchaException('Malformed SmartCaptcha response: no "status" field.');
         }
 
         $isStatusOk       = $data['status'] === 'ok';
