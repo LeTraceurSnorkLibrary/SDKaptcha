@@ -5,7 +5,6 @@ namespace LeTraceurSnork\SDKaptcha\SmartCaptcha;
 use LeTraceurSnork\Captcha\CaptchaException;
 use LeTraceurSnork\Captcha\CaptchaResponseInterface;
 use Psr\Http\Message\ResponseInterface;
-use RuntimeException;
 
 class SmartCaptchaResponse implements CaptchaResponseInterface
 {

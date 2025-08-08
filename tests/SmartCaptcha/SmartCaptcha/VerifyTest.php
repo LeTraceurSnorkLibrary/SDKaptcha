@@ -10,7 +10,6 @@ use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
-use RuntimeException;
 use Teapot\StatusCode\Http;
 
 /**
