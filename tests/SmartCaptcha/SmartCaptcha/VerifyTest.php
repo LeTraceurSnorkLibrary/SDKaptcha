@@ -10,7 +10,6 @@ use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
-use RuntimeException;
 use Teapot\StatusCode\Http;
 
 /**
@@ -49,7 +48,7 @@ class VerifyTest extends TestCase
      */
     public function testVerifyThrowsIfTokenIsEmpty()
     {
-        $this->expectException(RuntimeException::class);
+        $this->expectException(CaptchaException::class);
         $captcha = new SmartCaptcha('key', $this->createMock(ClientInterface::class));
         $captcha->verify('');
     }

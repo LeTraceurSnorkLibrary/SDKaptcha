@@ -77,7 +77,7 @@ class SmartCaptcha implements CaptchaVerifierInterface
     public function verify($token)
     {
         if (empty($token)) {
-            throw new RuntimeException('SmartCaptcha token cannot be empty.');
+            throw new CaptchaException('SmartCaptcha token cannot be empty.');
         }
 
         try {
