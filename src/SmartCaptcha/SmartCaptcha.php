@@ -21,7 +21,7 @@ class SmartCaptcha implements CaptchaVerifierInterface
     /**
      * URL to verify captcha's response.
      */
-    const SITE_VERIFY_URL = 'https://smartcaptcha.yandexcloud.net/validate';
+    const SITE_VERIFY_URL = 'https://smartcaptcha.cloud.yandex.ru/validate';
 
     /**
      * @var string SmartCaptcha secret serverKey
