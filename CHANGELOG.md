@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 ---
 
+## v1.2.0 - 2026-01-22
+
+### Changed
+
+- `SmartCaptcha::SITE_VERIFY_URL` (`https://smartcaptcha.yandexcloud.net/validate` -> `https://smartcaptcha.cloud.yandex.ru/validate`) - Yandex changed SmartCaptcha domain ([@LeTraceurSnork])
+
+### Fixed
+
+- `PHP-CS-Fixer` version pinned to ~3.69.1
+
 ## v1.1.1 - 2025-08-08
 
 ### Changed
